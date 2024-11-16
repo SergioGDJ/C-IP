@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+  int n_a, m_b;
+  scanf("%d%d", &n_a, &m_b);
+  int *a, *b;
+  a = malloc(n_a*sizeof(int));
+  b = malloc(m_b*sizeof(int));
+  int n_p=0, n_i=0;
+  int i;
+  for(i=0; i<n_a; i++){
+    scanf("%d", &a[i]);
+    if(a[i]%2 == 0)
+      n_p++;
+    else
+      n_i++;
+  }
+  for(i=0; i<m_b; i++)
+    scanf("%d", &b[i]);
+  int *par, *impar;
+  par = malloc(n_p * sizeof(int));
+  impar = malloc(n_i * sizeof(int));
+  int k=0;
+  for(i=0; i<n_a; i++){
+    if(a[i]%2 == 0){
+      par[k] = a[i];
+      k++;
+    }
+  }
+    k=0;
+  for(i=0; i<m_b; i++){
+    if(b[i]%2 != 0){
+      impar[k] = b[i];
+      k++;
+    }
+  }
+  int qt = n_p + n_i;
+  int *array;
+  array = malloc(qt*sizeof(int));
+  int j=0;
+  k=0; i=0;
+  while(n_p-- && n_i--){
+    array[k++] = par[j++];
+    array[k++] = impar[i++];
+  }
+  while(n_i--){
+    array[k++] = impar[i++]; 
+  }
+  while(n_p--)
+    array[k++] = par[j++];
+  for(i=0; i<qt; i++)
+    printf("%d", array[i]);
+  
+}
